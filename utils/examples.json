@@ -1,0 +1,98 @@
+[
+  {
+    "input": "List all customers in France with a credit limit over 20,000.",
+    "SQL Query": "SELECT * FROM customers WHERE country = 'France' AND creditLimit > 20000;"
+  },
+  {
+    "input": "Get the highest payment amount made by any customer.",
+    "SQL Query": "SELECT MAX(amount) FROM payments;"
+  },
+  {
+    "input": "Show product details for products in the 'Motorcycles' product line.",
+    "SQL Query": "SELECT * FROM products WHERE productLine = 'Motorcycles';"
+  },
+  {
+    "input": "Retrieve the names of employees who report to employee number 1002.",
+    "SQL Query": "SELECT firstName, lastName FROM employees WHERE reportsTo = 1002;"
+  },
+  {
+    "input": "List all products with a stock quantity less than 7000.",
+    "SQL Query": "SELECT productName, quantityInStock FROM products WHERE quantityInStock < 7000;"
+  },
+  {
+    "input": "What is price of `1968 Ford Mustang`",
+    "SQL Query": "SELECT `buyPrice`, `MSRP` FROM products WHERE `productName` = '1968 Ford Mustang';"
+  },
+  {
+    "input": "List all orders with their associated customer names and order dates.",
+    "SQL Query": "SELECT orders.orderNumber, customers.customerName, orders.orderDate FROM orders JOIN customers ON orders.customerNumber = customers.customerNumber;"
+  },
+  {
+    "input": "Show the details of employees and their offices.",
+    "SQL Query": "SELECT employees.employeeNumber, employees.firstName, employees.lastName, offices.city, offices.country FROM employees JOIN offices ON employees.officeCode = offices.officeCode;"
+  },
+  {
+    "input": "List all products in each order along with order dates.",
+    "SQL Query": "SELECT orders.orderNumber, orders.orderDate, orderdetails.productCode, orderdetails.quantityOrdered FROM orders JOIN orderdetails ON orders.orderNumber = orderdetails.orderNumber;"
+  },
+  {
+    "input": "Find the total sales amount for each customer.",
+    "SQL Query": "SELECT customerNumber, SUM(amount) AS totalSales FROM payments GROUP BY customerNumber;"
+  },
+  {
+    "input": "Count the number of orders placed by each customer.",
+    "SQL Query": "SELECT customerNumber, COUNT(orderNumber) AS orderCount FROM orders GROUP BY customerNumber;"
+  },
+  {
+    "input": "Find the average credit limit for customers in each country.",
+    "SQL Query": "SELECT country, AVG(creditLimit) AS avgCreditLimit FROM customers GROUP BY country;"
+  },
+  {
+    "input": "List customers with total payments exceeding 50,000.",
+    "SQL Query": "SELECT customerNumber, SUM(amount) AS totalPayments FROM payments GROUP BY customerNumber HAVING SUM(amount) > 50000;"
+  },
+  {
+    "input": "Find products with total sales quantity exceeding 1000.",
+    "SQL Query": "SELECT productCode, SUM(quantityOrdered) AS totalQuantity FROM orderdetails GROUP BY productCode HAVING SUM(quantityOrdered) > 1000;"
+  },
+  {
+    "input": "Find the highest payment amount made by any customer.",
+    "SQL Query": "WITH MaxPayment AS ( SELECT MAX(amount) AS maxAmount FROM payments ) SELECT maxAmount FROM MaxPayment;"
+  },
+  {
+    "input": "Get the total sales amount by product line.",
+    "SQL Query": "WITH ProductSales AS ( SELECT products.productLine, SUM(orderdetails.priceEach * orderdetails.quantityOrdered) AS totalSales FROM products JOIN orderdetails ON products.productCode = orderdetails.productCode GROUP BY products.productLine ) SELECT productLine, totalSales FROM ProductSales;"
+  },
+  {
+    "input": "Retrieve the top 3 most expensive products in each product line.",
+    "SQL Query": "SELECT productLine, productName, buyPrice FROM ( SELECT productLine, productName, buyPrice, ROW_NUMBER() OVER (PARTITION BY productLine ORDER BY buyPrice DESC) AS rk FROM products ) ranked_products WHERE rk <= 3;"
+  },
+  {
+    "input": "Calculate the running total of payments for each customer.",
+    "SQL Query": "SELECT customerNumber, paymentDate, amount, SUM(amount) OVER (PARTITION BY customerNumber ORDER BY paymentDate) AS runningTotal FROM payments;"
+  },
+  {
+    "input": "Rank customers based on their total payment amounts.",
+    "SQL Query": "SELECT customerNumber, SUM(amount) AS totalPayments, RANK() OVER (ORDER BY SUM(amount) DESC) AS paymentRank FROM payments GROUP BY customerNumber;"
+  },
+  {
+    "input": "List the total number of orders and total amount spent by each customer.",
+    "SQL Query": "SELECT customers.customerNumber, customers.customerName, COUNT(orders.orderNumber) AS orderCount, SUM(orderdetails.priceEach * orderdetails.quantityOrdered) AS totalSpent FROM customers JOIN orders ON customers.customerNumber = orders.customerNumber JOIN orderdetails ON orders.orderNumber = orderdetails.orderNumber GROUP BY customers.customerNumber, customers.customerName;"
+  },
+  {
+    "input": "Show the total quantity ordered for each product.",
+    "SQL Query": "SELECT products.productCode, products.productName, SUM(orderdetails.quantityOrdered) AS totalQuantity FROM products JOIN orderdetails ON products.productCode = orderdetails.productCode GROUP BY products.productCode, products.productName;"
+  },
+  {
+    "input": "Find the average order value for each customer.",
+    "SQL Query": "SELECT customers.customerNumber, customers.customerName, AVG(orderdetails.priceEach * orderdetails.quantityOrdered) AS avgOrderValue FROM customers JOIN orders ON customers.customerNumber = orders.customerNumber JOIN orderdetails ON orders.orderNumber = orderdetails.orderNumber GROUP BY customers.customerNumber, customers.customerName;"
+  },
+  {
+    "input": "Retrieve the top 3 customers based on total payments in each country.",
+    "SQL Query": "SELECT country, customerName, totalPayments FROM ( SELECT customers.country, customers.customerName, SUM(payments.amount) AS totalPayments, ROW_NUMBER() OVER (PARTITION BY customers.country ORDER BY SUM(payments.amount) DESC) AS rk FROM customers JOIN payments ON customers.customerNumber = payments.customerNumber GROUP BY customers.country, customers.customerName ) ranked_customers WHERE rk <= 3;"
+  },
+  {
+    "input": "List employees and their total sales, ranking them within their office.",
+    "SQL Query": "SELECT employees.officeCode, employees.firstName, employees.lastName, SUM(orderdetails.priceEach * orderdetails.quantityOrdered) AS totalSales, RANK() OVER (PARTITION BY employees.officeCode ORDER BY SUM(orderdetails.priceEach * orderdetails.quantityOrdered) DESC) AS salesRank FROM employees JOIN orders ON employees.employeeNumber = orders.salesRepEmployeeNumber JOIN orderdetails ON orders.orderNumber = orderdetails.orderNumber GROUP BY employees.officeCode, employees.firstName, employees.lastName;"
+  }
+]

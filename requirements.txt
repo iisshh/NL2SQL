@@ -1,0 +1,11 @@
+streamlit
+langchain
+langchain-community
+langchain-groq
+langchain-core
+mysql-connector-python
+groq
+langchain-groq
+python-dotenv
+chromadb
+sentence-transformers
