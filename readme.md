@@ -12,7 +12,8 @@ This project introduces the Llama 3 70B model, showcasing its potential in the f
   - [Step 1: Clone the Repository](#step-1-clone-the-repository)
   - [Step 2: Create and Activate a Conda Environment](#step-2-create-and-activate-a-conda-environment)
   - [Step 3: Install the Required Packages](#step-3-install-the-required-packages)
-  - [Step 4: Create an .env File and Add Necessary API Keys](#step-4-create-an-dot-env-file-and-add-necessary-api-keys)
+  - [Step 4: Create an .env File and Add Necessary API Keys](#step-4-create-a-dot-env-file-and-add-necessary-api-keys)
+
 - [Usage](#usage)
 - [Design details and working](#design-details-and-working)
 
@@ -51,7 +52,8 @@ conda activate nl2sql_env
 pip install -r requirements.txt
 ```
 
-### Step 4: Create an dot env file add necessary api keys:
+### Step 4: Create a dot env file and add necessary API keys
+
 
 ```bash
 OPENAI_API_KEY=[your-openai-api-key]
