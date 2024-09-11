@@ -3,9 +3,6 @@ A Natural Language to SQL (NL2SQL) converter is a powerful solution that greatly
 
 This project introduces the Llama 3 70B model, showcasing its potential in the field of generative AI to translate natural language inputs into SQL queries for a MySQL database. For a demonstration, please refer to the YouTube video linked below. The demo utilizes a sample database available from MySQL Sample Database.
 
-<a href="https://youtu.be/NYlC8PhgFUA">
-    <img src="https://img.youtube.com/vi/NYlC8PhgFUA/maxresdefault.jpg" alt="Watch the video" width="400"/>
-</a>
 
 ## Table of Contents
 
@@ -38,7 +35,7 @@ Additionally, ensure you have access to a MySQL database along with the necessar
 First, clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/harshith-np/NL2SQL.git
+git clone https://github.com/iisshh/NL2SQL.git
 cd NL2SQL
 ```
 ### Step 2: Create and Activate a Conda Environment
