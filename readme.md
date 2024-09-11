@@ -45,13 +45,13 @@ conda create --name nl2sql_env python=3.8
 conda activate nl2sql_env
 ```
 
-### Step 3:Install the required packages:
+### Step 3: Install the required packages:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Step 4:Create an .env file add necessary api keys:
+### Step 4: Create an .env file add necessary api keys:
 
 ```bash
 OPENAI_API_KEY=[your-openai-api-key]
